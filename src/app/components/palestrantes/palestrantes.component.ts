@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-palestrantes',
   templateUrl: './palestrantes.component.html',
-  styleUrls: ['./palestrantes.component.scss']
+  styleUrls: ['./palestrantes.component.css']
 })
 export class PalestrantesComponent implements OnInit {
 
-  constructor() { }
+  constructor(private titleService : Title) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.titleService.setTitle('Palestrantes')
   }
-
 }

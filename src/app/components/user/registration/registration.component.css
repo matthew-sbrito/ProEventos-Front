@@ -1,0 +1,35 @@
+.box-main{
+  display: grid;
+  grid-template-columns: 40% auto;
+  grid-template-rows: 1fr;
+  grid-template-areas: "Img Form";
+  margin-top: 50px;
+}
+.box-img{
+  grid-area: Img;
+  margin: 0 auto;
+}
+.box-img div{
+  text-align: center;
+  margin: 0 auto;
+}
+.box-img > div > img{
+  margin: 30px 0px;
+}
+.box-form{
+  grid-area: Form;
+}
+.d-resp{
+  display: none;
+}
+@media (max-width: 1000px){
+  .box-main{
+    grid-template-columns: auto;
+  }
+  .box-img{
+    display: none;
+  }
+  .d-resp{
+    display: block;
+  }
+}

@@ -1,0 +1,32 @@
+
+.btn-new{
+  margin-left: 5px;
+}
+.search-box{
+  display: flex;
+}
+.search-input{
+  padding-right: 10px;
+  flex: 1;
+}
+.trow{
+  cursor: pointer;
+}
+@media (max-width: 991px){
+  .btn-new{
+    display: none;
+  }
+  .th-resp{
+    display: none;
+  }
+}
+@media (max-width: 767px){
+  .th-resp-sm{
+    display: none;
+  }
+}
+@media (max-width: 420px){
+  .th-resp-vr-sm{
+    display: none;
+  }
+}

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-title',
@@ -8,9 +9,16 @@ import { Component, Input, OnInit } from '@angular/core';
 export class TitleComponent implements OnInit {
 
   @Input() title!: string;
-  constructor() { }
+  @Input() subtitle = 'Perfil do usuário';
+  @Input() iconClass = 'fa fa-user';
+  @Input() function : any;
+
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
 
+  action():void{
+    this.function();
+  }
 }

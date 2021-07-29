@@ -1,2 +1,14 @@
-<h2>{{ title }}</h2>
-<hr>
+<div class="d-flex p-3 my-3 text-white bg-secondary rounded shadow-sm">
+  <div class="title">
+    <i class="{{iconClass}}"></i>
+    <div class="lh-100">
+      <h2 class="mb-0">{{ title }}</h2>
+      <small>{{subtitle}}</small>
+    </div>
+  </div>
+  <div *ngIf="function" class="btn-title">
+    <button class="btn btn-outline-light" (click)="action()">
+      Listar {{ title }}
+    </button>
+  </div>
+</div>
