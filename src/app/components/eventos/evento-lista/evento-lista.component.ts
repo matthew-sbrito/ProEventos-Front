@@ -1,17 +1,19 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
 
-import { EventoService } from '../../../services/evento.service';
-import { Evento } from '../../../models/Evento';
-import { Router } from '@angular/router';
+import { EventoService } from '@app/services/evento.service';
+import { Evento } from '@app/models/Evento';
+
 @Component({
   selector: 'app-evento-lista',
   templateUrl: './evento-lista.component.html',
   styleUrls: ['./evento-lista.component.css']
 })
+
 export class EventoListaComponent implements OnInit {
 
 
@@ -41,8 +43,9 @@ export class EventoListaComponent implements OnInit {
   public getEventos(): void {
     this.eventoService.getEventos().subscribe({
       next: (eventosResp : Evento[]) => {
-      this.eventos = eventosResp
-      this.eventosFilters = this.eventos
+      this.eventos = eventosResp;
+      this.eventosFilters = this.eventos;
+      this.toastr.success('Evento(s) carregado com sucesso!', 'Sucesso!');
       },
       error : (error: any) => {
         this.spinner.hide();
