@@ -19,6 +19,7 @@ export class EventoListaComponent implements OnInit {
 
   public eventos: Evento[] = [];
   public eventosFilters: Evento[] = [];
+  public eventoId: number = 0;
 
   public  widthImg      = 150;
   public  marginImg     = 2;
@@ -37,22 +38,17 @@ export class EventoListaComponent implements OnInit {
 
   public ngOnInit(): void {
     this.spinner.show();
-    this.getEventos();
+    this.loadEventos();
   }
 
-  public getEventos(): void {
-    this.eventoService.getEventos().subscribe({
-      next: (eventosResp : Evento[]) => {
+  public loadEventos(): void {
+    this.eventoService.getEventos().subscribe(
+      (eventosResp : Evento[]) => {
       this.eventos = eventosResp;
       this.eventosFilters = this.eventos;
-      this.toastr.success('Evento(s) carregado com sucesso!', 'Sucesso!');
       },
-      error : (error: any) => {
-        this.spinner.hide();
-        this.toastr.error('Erro ao carregar os Eventos', 'Erro!');
-      },
-      complete : () => this.spinner.hide()
-    });
+      (error: any) => this.toastr.error('Erro ao carregar os Eventos', 'Erro!'),
+    ).add(() => this.spinner.hide());;
   }
 
   public get filterList(): string {
@@ -74,13 +70,28 @@ export class EventoListaComponent implements OnInit {
     this.showImg = !this.showImg
   }
 
-  openModal(template: TemplateRef<any>): void {
-    this.modalRef = this.modalService.show(template);
+  openModal(event: any, template: TemplateRef<any>, eventoId: number): void {
+    event.stopPropagation();
+    this.eventoId = eventoId;
+    this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
   }
 
   confirm(): void {
     this.modalRef.hide();
-    this.toastr.success('Evento deletado com sucesso!','Deletado!');
+    this.spinner.show();
+    this.eventoService.deleteEvento(this.eventoId).subscribe(
+      (response: any) => {
+        if(response.message == 'Deletado'){
+          this.toastr.success('Evento deletado com sucesso!','Deletado!');
+          this.spinner.hide();
+          this.loadEventos();
+        }
+      },
+      (error:any) =>{
+        this.toastr.error(`Erro ao deletar o evento ${this.eventoId}`, 'Erro!');
+        console.error(error);
+      },
+    ).add(() => this.spinner.hide());
   }
 
   decline(): void {

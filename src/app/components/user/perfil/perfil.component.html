@@ -45,7 +45,7 @@
 				<div class="form-group col">
 					<label>Título</label>
 					<select class="form-control" [ngClass]="{'is-invalid' : f.title.errors && f.title.touched}" formControlName="title">
-						<option value=""></option>
+						<option value="" disabled>Selecione...</option>
 						<option value="0">Não Quero</option>
 						<option value="Senhorita">Tecnólogo(a)</option>
 						<option value="Senhorita">Bacharel</option>
@@ -55,17 +55,22 @@
 						<option value="Senhorita">Doutor(a)</option>
 						<option value="Senhorita">Pós Doc</option>
 					</select>
+					<div *ngIf="f.function.errors?.required" class="invalid-feedback">
+            Titulo é obrigatório!
+          </div>
 				</div>
 				<div class="form-group col-sm-5">
 					<label>Primeiro Nome</label>
 					<input [ngClass]="{'is-invalid' : f.firstName.errors && f.firstName.touched}" formControlName="firstName" type="text" class="form-control"/>
-
+					<div *ngIf="f.firstName.errors?.required" class="invalid-feedback">
+            Primeiro nome é obrigatório!
+          </div>
 				</div>
 				<div class="form-group col-sm-5">
 					<label>Último nome</label>
 					<input [ngClass]="{'is-invalid' : f.lastName.errors && f.lastName.touched}" formControlName="lastName" type="text" class="form-control"/>
           <div *ngIf="f.lastName.errors?.required" class="invalid-feedback">
-            Senha precisa ter no minimo 6 caracteres!
+            Último nome é obrigatório!
           </div>
 				</div>
 			</div>
@@ -133,7 +138,7 @@
 			<button (click)="resetForm($event)" class="btn btn-outline-secondary mr-auto border">
 				Cancelar Alteração
 			</button>
-			<button class="btn btn-success">
+			<button class="btn btn-success" [disabled]="!form.valid">
 				<!-- <span class="spinner-border spinner-border-sm mr-1"></span> -->
 				Salvar Alteração
 			</button>
