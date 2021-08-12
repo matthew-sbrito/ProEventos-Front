@@ -61,6 +61,10 @@
           </span>
         </td>
         <td>
+          <button class="btn btn-primary mr-2" tooltip="Email"
+          (click)="openModal($event, modalSendEmail, evento.id)">
+            Participar
+          </button>
           <button class="btn btn-danger" tooltip="Excluir"
           (click)="openModal($event, modalDelete, evento.id)">
             <i class="fa fa-trash"></i>
@@ -83,5 +87,15 @@
     <p>Tem certeza que quer deletar o evento de código {{eventoId}}?</p>
     <button type="button" class="btn btn-default" (click)="confirm()" >Sim</button>
     <button type="button" class="btn btn-primary" (click)="decline()" >Não</button>
+  </div>
+</ng-template>
+
+<ng-template #modalSendEmail>
+  <div class="modal-body text-center">
+    <p>Insira seu email para receber uma confirmação!</p>
+    <input type="text" class="form-control"
+    placeholder="email@exemple.com" [(ngModel)]="emailReceiver">
+    <button type="button" class="btn btn-default" (click)="sendEmail()" > Enviar   </button>
+    <button type="button" class="btn btn-primary" (click)="decline()" > Cancelar </button>
   </div>
 </ng-template>

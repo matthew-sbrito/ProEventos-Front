@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 import { EventoService } from '@app/services/evento.service';
+import { EmailService } from '@app/services/email.service';
 import { Evento } from '@app/models/Evento';
 
 @Component({
@@ -25,12 +26,14 @@ export class EventoListaComponent implements OnInit {
   public  marginImg     = 2;
   public  showImg       = false;
   private filterListed  = '';
+  public  emailReceiver = '';
 
   private modalRef!: BsModalRef;
 
   constructor(
     private eventoService: EventoService,
     private modalService: BsModalService,
+    private emailService: EmailService,
     private toastr: ToastrService,
     private spinner: NgxSpinnerService,
     private router: Router,
@@ -99,5 +102,25 @@ export class EventoListaComponent implements OnInit {
   }
   detalheEvento(id: number): void {
     this.router.navigate([`/eventos/detalhe/${id}`]);
+  }
+
+  sendEmail(): void{
+    this.modalRef.hide();
+    this.spinner.show();
+
+    this.emailService.sendEmailConfirm(this.emailReceiver, this.eventoId).subscribe(
+      (response: any) => {
+        if(response.message == 'Deletado'){
+          this.toastr.success('Evento deletado com sucesso!','Deletado!');
+          this.spinner.hide();
+          this.loadEventos();
+        }
+      },
+      (error:any) =>{
+        this.toastr.error(`Erro ao enviar email para ${this.emailReceiver}`, 'Erro!');
+        this.emailReceiver = '';
+        console.error(error);
+      },
+    ).add(() => this.spinner.hide());
   }
 }

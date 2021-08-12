@@ -89,6 +89,11 @@ export class EventoDetalheComponent implements OnInit {
       telefone: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       imagemURL: ['', [Validators.required]],
+      lotes: [
+        {
+          
+        }
+      ]
     });
   }
 
