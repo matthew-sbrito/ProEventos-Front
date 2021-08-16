@@ -3,6 +3,7 @@ import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { UserService } from '@app/services/user.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -17,6 +18,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private titleService: Title,
     private userService: UserService,
+    private toastr: ToastrService,
     private spinner: NgxSpinnerService,
     private router: Router,
     ) { }
@@ -27,11 +29,16 @@ export class LoginComponent implements OnInit {
   public login(): void {
     this.spinner.show();
     this.userService.authLogin(this.email, this.senha).subscribe(
-    (user: any)  => {
-      localStorage.setItem('id', user.id);
+    (resp: any)  => {
+      console.log(resp);
+      window.localStorage.setItem('token', resp.token);
       this.router.navigate(['/'])
+      this.toastr.success('Login Realizado!', 'Bem vindo!');
     },
-    (err: Error) => { console.error(err) },
+    (err: Error) => {
+      console.error(err);
+      this.toastr.error('Email ou senha invalidos!', 'Tente novamente!');
+    },
     () => {}
     ).add(() => this.spinner.hide());
   }

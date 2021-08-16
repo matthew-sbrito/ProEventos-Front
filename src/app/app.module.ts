@@ -1,5 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { BrowserModule, Title } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -19,6 +19,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import { HomeComponent } from './components/layout/home/home.component';
+import { AuthenticationComponent } from './components/layout/authentication/authentication.component';
 import { NavComponent } from './shared/nav/nav.component';
 import { EventosComponent } from './components/eventos/eventos.component';
 import { PalestrantesComponent } from './components/palestrantes/palestrantes.component';
@@ -34,17 +36,18 @@ import { EventoDetalheComponent } from './components/eventos/evento-detalhe/even
 import { EventoListaComponent } from './components/eventos/evento-lista/evento-lista.component';
 import { UserComponent } from './components/user/user.component';
 import { LoginComponent } from './components/user/login/login.component';
-import { RegistrationComponent } from './components/user/registration/registration.component'
+import { RegistrationComponent } from './components/user/registration/registration.component';
 import { EmailService } from './services/email.service';
 import { LoteService } from './services/lote.service';
 import { UserService } from './services/user.service';
-import { AuthService } from './services/auth.service';
 
-defineLocale('pt-br', ptBrLocale)
+defineLocale('pt-br', ptBrLocale);
 
 @NgModule({
   declarations: [
     AppComponent,
+    HomeComponent,
+    AuthenticationComponent,
     EventosComponent,
     PalestrantesComponent,
     ContatosComponent,
@@ -58,7 +61,7 @@ defineLocale('pt-br', ptBrLocale)
     UserComponent,
     LoginComponent,
     RegistrationComponent,
-   ],
+  ],
   imports: [
     BrowserModule,
     FormsModule,
@@ -75,18 +78,12 @@ defineLocale('pt-br', ptBrLocale)
       timeOut: 5000,
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
-      progressBar: true
+      progressBar: true,
     }),
-    NgxSpinnerModule
+    NgxSpinnerModule,
   ],
-  providers: [
-    EventoService,
-    LoteService,
-    UserService,
-    AuthService,
-    EmailService
-  ],
+  providers: [EventoService, LoteService, UserService, EmailService],
   bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule {}

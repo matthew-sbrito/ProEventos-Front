@@ -22,11 +22,23 @@ public getUserById(userId: number): Observable<User>{
   .get<User>(`${this.baseURL}/${userId}`)
   .pipe(take(1));
 };
-public authLogin(email: string, senha: string): Observable<User>{
+public getUserByEmail(email: string): Observable<User>{
   return this.http
-  .post<User>(`${this.baseURL}/login`, {
+  .post<User>(`${this.baseURL}/email`, { email: email})
+  .pipe(take(1));
+};
+public authLogin(email: string, senha: string): Observable<object>{
+  return this.http
+  .post<object>(`https://localhost:5001/authenticate/login`, {
     email: email,
     senha: senha
+  })
+  .pipe(take(1));
+};
+public getUserByToken(token: string): Observable<User>{
+  return this.http
+  .post<User>(`https://localhost:5001/authenticate/user`, {
+    token: token,
   })
   .pipe(take(1));
 };

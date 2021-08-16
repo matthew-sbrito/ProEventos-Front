@@ -53,7 +53,7 @@
         <td>{{ evento.id }}</td>
         <td>{{ evento.tema }}</td>
         <td class="th-resp">{{ evento.local }}</td>
-        <td >{{ evento.dataEvento | DateTimeFormat }}</td>
+        <td >{{ evento.dataEvento | DateTimeFormatPipe }}</td>
         <td class="th-resp-vr-sm">{{ evento.qtdPessoas }}</td>
         <td class="th-resp-sm">
           <span *ngFor="let lote of evento.lotes">
@@ -93,9 +93,9 @@
 <ng-template #modalSendEmail>
   <div class="modal-body text-center">
     <p>Insira seu email para receber uma confirmação!</p>
-    <input type="text" class="form-control"
+    <input type="text" class="form-control mb-3"
     placeholder="email@exemple.com" [(ngModel)]="emailReceiver">
-    <button type="button" class="btn btn-default" (click)="sendEmail()" > Enviar   </button>
-    <button type="button" class="btn btn-primary" (click)="decline()" > Cancelar </button>
+    <button type="button" class="btn btn-default" (click)="decline()" > Cancelar </button>
+    <button type="button" class="btn btn-primary" (click)="sendEmail()" > Enviar   </button>
   </div>
 </ng-template>

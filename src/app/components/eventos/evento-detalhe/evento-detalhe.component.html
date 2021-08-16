@@ -30,7 +30,7 @@
           <label>Data e Hora</label>
           <input type="datetime" class="form-control"
           [ngClass]="cssValidator(f.dataEvento)"
-          value="{{evento.dataEvento|DateTimeFormat}}"
+          value="{{ evento.dataEvento | DateTimeFormatPipe }}"
           bsDatepicker
           [bsConfig]="bsConfig"
           formControlName="dataEvento" placeholder="">
@@ -92,7 +92,7 @@
   </form>
 </div>
 
-<div class="card rounded shadow-sm mt-4">
+<!-- <div class="card rounded shadow-sm mt-4">
   <div class="p-3">
     <div class="d-flex border-bottom">
       <h2 class="mr-auto">
@@ -158,7 +158,7 @@
     </button>
   </div>
 </div>
-</div>
+</div> -->
 
 
 

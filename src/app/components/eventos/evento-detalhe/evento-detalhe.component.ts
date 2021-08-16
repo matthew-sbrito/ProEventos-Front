@@ -88,12 +88,7 @@ export class EventoDetalheComponent implements OnInit {
       qtdPessoas: ['', [Validators.required, Validators.max(120000)]],
       telefone: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
-      imagemURL: ['', [Validators.required]],
-      lotes: [
-        {
-          
-        }
-      ]
+      imagemURL: ['', [Validators.required]]
     });
   }
 
